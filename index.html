@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<html translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="img/3_enemies_chicken/chicken_normal/1_walk/1_w.png" type="image/x-icon">
+    <title>El pollo loco</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <script src="models/drawable-object.class.js"></script>
+    <script src="models/movable-object.class.js"></script>
+    <script src="models/character.class.js"></script>
+    <script src="models/chicken.class.js"></script>
+    <script src="models/small-chicken.class.js"></script>
+    <script src="models/cloud.class.js"></script>
+    <script src="models/background-object.class.js"></script>
+    <script src="models/health-bar.class.js"></script>
+    <script src="models/coin-bar.class.js"></script>
+    <script src="models/bottle-bar.class.js"></script>
+    <script src="models/statusbar-endboss.class.js"></script>
+    <script src="models/world.class.js"></script>
+    <script src="models/keyboard.class.js"></script>
+    <script src="models/level.class.js"></script>
+    <script src="models/endboss.class.js"></script>
+    <script src="models/throwable-object.class.js"></script>
+    <script src="models/coin.class.js"></script>
+    <script src="models/bottle.class.js"></script>
+    <script src="levels/level1.js"></script>
+    <script src="js/game.js"></script>
+
+</head>
+
+<body>
+
+    <h1>El Pollo Loco</h1>
+
+    <div class="start-screen" id="start-screen">
+        <img src="./img/9_intro_outro_screens/start/startscreen_2.png" alt="" class="start-image">
+        <button class="start-btn" onclick="init()">Start Game</button>
+        <button class="audio-btn">
+            <img id="unmute" class="audio-image d-none" onclick="muteAll()"
+                src="./img/9_intro_outro_screens/start/audio.png" alt="">
+            <img id="mute" class="audio-image" onclick="unmuteAll()" src="./img/9_intro_outro_screens/start/mute.png"
+                alt="">
+        </button>
+        <button class="imprint-btn" onclick="openImprint()" title="Impressum">§ Imprint</button>
+    </div>
+
+    <div id="canvas-container" class="canvas-container d-none">
+
+        <canvas id="canvas" height="480" width="720"></canvas>
+        <div id="ingame-sound-container" class="ingame-sound-container">
+            <button class="mobile-btn">
+                <img id="ingame-audio" class="ingame-audio d-none" onclick="muteAll()"
+                    src="./img/9_intro_outro_screens/start/audio.png" alt="">
+                <img id="ingame-mute" class="ingame-audio" onclick="unmuteAll()"
+                    src="./img/9_intro_outro_screens/start/mute.png" alt="">
+            </button>
+        </div>
+        <div class="mobile-controls">
+            <div class="mobile-controls-helper">
+                <button id="touch-left" class="mobile-btn">
+                    <img src="./img/9_intro_outro_screens/start/left.png" alt="">
+                </button>
+                <button id="touch-right" class="mobile-btn">
+                    <img src="./img/9_intro_outro_screens/start/rigth.png" alt="">
+                </button>
+            </div>
+            <div class="mobile-controls-helper">
+                <button id="touch-jump" class="mobile-btn">
+                    <img src="./img/9_intro_outro_screens/start/jump.png" alt="">
+                </button>
+                <button id="touch-throw" class="mobile-btn">
+                    <img src="./img/9_intro_outro_screens/start/shoot.png" alt="">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="end-screen d-none" id="end-screen">
+        <button class="menu-btn" onclick="backToMenu()">Main Menu</button>
+        <button class="restart-btn" onclick="restart()">Restart</button>
+    </div>
+
+    <div class="imprint d-none" id="imprint">
+        <div class="close" onclick="closeImprint()" title="close">X</div>
+        <h2>Impressum</h2>
+        <p>Angaben gemäß § 5 TMG</p>
+        <p>Marcus Haas <br>
+            Hillenhardt 21<br>
+            53937 Schleiden <br>
+        </p>
+        <p> <strong>Vertreten durch: </strong><br>
+            Marcus Haas<br>
+        </p>
+        <p><strong>Kontakt:</strong> <br>
+            Telefon: 0151-28438087<br>
+            E-Mail: <a href='mailto:marcus-haas@hotmail.de'>marcus-haas@hotmail.de</a></br></p><br>
+        Impressum vom <a href="https://www.impressum-generator.de">Impressum Generator</a>
+        der <a href="https://www.kanzlei-hasselbach.de/standorte/frankfurt/" rel="nofollow">Kanzlei Hasselbach,
+            Frankfurt</a>
+    </div>
+
+    <div class="controls">
+        <div class="controls-child">
+            <img src="./img/9_intro_outro_screens/start/left.png" alt="">
+            <div>move left</div>
+        </div>
+        <div class="controls-child">
+            <img src="./img/9_intro_outro_screens/start/rigth.png" alt="">
+            <div>move right</div>
+        </div>
+        <div class="controls-child">
+            <img src="./img/9_intro_outro_screens/start/space.png" alt="">
+            <div>jump</div>
+        </div>
+        <div class="controls-child">
+            <div class="D-key">D</div>
+            <div>throw bottle</div>
+        </div>
+    </div>
+
+    <div class="device-info">
+        <img src="./img/9_intro_outro_screens/start/turn.png" alt="">
+        <p>Please turn your device</p>
+    </div>
+</body>
+
+</html>
