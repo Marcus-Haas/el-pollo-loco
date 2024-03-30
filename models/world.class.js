@@ -29,11 +29,19 @@ class World {
     }
 
 
+    /**
+     * Combines charater with world
+     * 
+     */
     setWorld() {
         this.character.world = this;
     }
 
 
+    /**
+     * Start several functions by setting an interval
+     * 
+     */
     run() {
         let run_Interval = setInterval(() => {
             this.checkCollisions();
@@ -48,6 +56,10 @@ class World {
     }
 
 
+    /**
+     * This function checks if the charcter is colliding with an enemy
+     * 
+     */
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && enemy.dead == false && !this.character.isAboveGround()) {
@@ -59,6 +71,10 @@ class World {
     }
 
 
+    /**
+     * This function checks if the enemy is hit by character jump on it
+     * 
+     */
     jumpKillEnemy() {
         this.level.enemies.forEach((enemy) => {
             if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
@@ -72,6 +88,11 @@ class World {
     }
 
 
+    /**
+     * Delete the dead enemy from game
+     * 
+     * @param {object} enemy - is every new Enemy like chicken, small chicken and endboss
+     */
     deadEnemy(enemy) {
         if (enemy.dead == true) {
             setTimeout(() => {
@@ -82,6 +103,10 @@ class World {
     }
 
 
+    /**
+     * Check if the bottle hit on the enemies
+     * 
+     */
     checkBottleCollision() {
         for (let i = 0; i < this.throwableObject.length; i++) {
             let bottle = this.throwableObject[i];
@@ -97,6 +122,11 @@ class World {
     }
 
 
+    /**
+     * Set different parameters for the bottle if it hits the enemy and stop the throw interval
+     * 
+     * @param {string []} bottle - is the class throwable object
+     */
     setBottleParameters(bottle) {
         bottle.speedY = 0;
         bottle.acceleration = 0;
@@ -106,6 +136,12 @@ class World {
     }
 
 
+    /**
+     * Check if the chickens are hit by a bottle and set the dead parameter on true
+     * 
+     * @param {string []} bottle - is the class throwable object
+     * @param {string []} enemy - is every new Enemy like chicken, small chicken and endboss
+     */
     deadChickenViaBottle(bottle, enemy) {
         if (enemy instanceof Chicken && this.bottle_hit == 1 || enemy instanceof SmallChicken && this.bottle_hit == 1) {
             enemy.dead = true;
@@ -115,6 +151,11 @@ class World {
     }
 
 
+    /**
+     * Check if the endboss is hit by a bottle and change his energy and healthbar
+     * 
+     * @param {string []} enemy - is every new Enemy like chicken, small chicken and endboss
+     */
     checkHitEndboss(enemy) {
         if (enemy instanceof Endboss && this.bottle_hit == 1) {
             enemy.hit();
@@ -126,6 +167,11 @@ class World {
     }
 
 
+    /**
+     * Set the dead parameter to true if the enemies energy is zero
+     * 
+     * @param {string []} enemy - is every new Enemy like chicken, small chicken and endboss
+     */
     checkDeadEndboss(enemy) {
         if (enemy.energy == 0) {
             enemy.dead = true;
@@ -134,6 +180,10 @@ class World {
     }
 
 
+    /**
+     * With this function the character is able to cellect coins from the map
+     * 
+     */
     collectCoins() {
         for (let i = 0; i < this.level.coins.length; i++) {
             if (this.character.isColliding(this.level.coins[i])) {
@@ -148,6 +198,10 @@ class World {
     }
 
 
+    /**
+     * With this function the character is able to cellect bottles from the map
+     * 
+     */
     collectBottles() {
         for (let i = 0; i < this.level.bottles.length; i++) {
             if (this.character.isColliding(this.level.bottles[i])) {
@@ -162,6 +216,10 @@ class World {
     }
 
 
+    /**
+     * Set new throwable object if pressed D on keyboard, only possible if already collect at least one bottle
+     * 
+     */
     checkThrowObject() {
         if (this.keyboard.D && this.bottle_counter > 0 && this.throwableObject.length <= 0) {
             let bottle = new ThrowableObject(this.character.x, this.character.y, this.character.otherDirection);
@@ -175,6 +233,11 @@ class World {
     }
 
 
+
+    /**
+     * Delete the bottle if it splashs with an enemy or the ground
+     * 
+     */
     checkSplash() {
         for (let i = 0; i < this.throwableObject.length; i++) {
             if (this.throwableObject[i].splash) {
@@ -186,6 +249,10 @@ class World {
     }
 
 
+    /**
+     * Draw the canvas like the maximum capacity of the graphic card
+     * 
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -216,6 +283,11 @@ class World {
     }
 
 
+
+    /**
+     * Show the healthbar from endboss if the parameter is true
+     * 
+     */
     showStatusbarEndboss() {
         this.level.enemies.forEach((enemy) => {
             if (enemy.show_endboss_bar) {
@@ -228,6 +300,11 @@ class World {
     }
 
 
+    /**
+     * Add new objects to the map/canvas
+     * 
+     * @param {string []}  objects - every new object
+     */
     addObjectsToMap(objects) {
         objects.forEach((o) => {
             this.addToMap(o);
@@ -235,19 +312,27 @@ class World {
     }
 
 
+    /**
+     * Add objects to map/canvas with the option to flip image
+     * 
+     * @param {string []} mo - movable objects - every new object
+     */
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        //mo.drawFrame(this.ctx);
-        //mo.drawFrameOffset(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
     }
 
 
+    /**
+     * Flip the image if change moving direction
+     * 
+     * @param {string []} mo - movable object like character or enemy
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -256,6 +341,11 @@ class World {
     }
 
 
+    /**
+     * flip image back if you change move direction again
+     * 
+     * @param {string []} mo - movable object like character or enemy
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();

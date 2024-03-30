@@ -10,6 +10,10 @@ lost_sound = new Audio('./audio/pepe_death.mp3');
 win_sound = new Audio('./audio/win.mp3');
 
 
+/**
+ * play backgroundmusic if the master_sound parameter is true
+ * 
+ */
 function playBackgroundMusic() {
     if (master_sound) {
         background_Music.play();
@@ -19,17 +23,31 @@ function playBackgroundMusic() {
 }
 
 
+/**
+ * push an interval to the global array GAME_INTERVALS
+ * 
+ * @param {string} interval - interval stands global for every interval
+ */
 function pushInterval(interval) {
     GAME_INTERVALS.push(interval);
 }
 
 
+/**
+ * This function clear all intervals and set the GAME_INTERVALS array to an empty one
+ * 
+ */
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
     GAME_INTERVALS = [];
 }
 
 
+
+/**
+ * This function initialize the game 
+ * 
+ */
 function init() {
     initLevel();
     startTouchEvent();
@@ -41,6 +59,10 @@ function init() {
 }
 
 
+/**
+ * This function restart the game
+ * 
+ */
 function restart() {
     init();
     document.getElementById('end-screen').classList.add('d-none');
@@ -48,18 +70,30 @@ function restart() {
 }
 
 
+/**
+ * This function open the impressum
+ * 
+ */
 function openImprint() {
     document.getElementById('start-screen').classList.add('d-none');
     document.getElementById('imprint').classList.remove('d-none');
 }
 
 
+/**
+ * This function close the impressum
+ * 
+ */
 function closeImprint() {
     document.getElementById('start-screen').classList.remove('d-none');
     document.getElementById('imprint').classList.add('d-none');
 }
 
 
+/**
+ * This function mute all game sounds
+ * 
+ */
 function muteAll() {
     document.getElementById('unmute').classList.add('d-none');
     document.getElementById('mute').classList.remove('d-none');
@@ -70,6 +104,10 @@ function muteAll() {
 }
 
 
+/**
+ * This function unmute all game sounds
+ * 
+ */
 function unmuteAll() {
     document.getElementById('unmute').classList.remove('d-none');
     document.getElementById('mute').classList.add('d-none');
@@ -80,6 +118,11 @@ function unmuteAll() {
 }
 
 
+/**
+ * This function shows the endscreen in two different styles
+ * 
+ * @param {string} result - show us if the user win or lost the game
+ */
 function showEndscreen(result) {
     background_Music.pause();
     document.getElementById('canvas-container').classList.add('d-none');
@@ -88,6 +131,11 @@ function showEndscreen(result) {
 }
 
 
+/**
+ * This function check, which endscreen we will see at the end (win or loose)
+ * 
+ * @param {string} result - show us if the user win or lost the game
+ */
 function setBackgroundImage(result) {
     if (result == 'win') {
         document.getElementById('end-screen').style.backgroundImage = "url('./img/9_intro_outro_screens/game_over/game over.png')";
@@ -103,6 +151,10 @@ function setBackgroundImage(result) {
 }
 
 
+/**
+ * This function guides you back to the main menu
+ * 
+ */
 function backToMenu() {
     document.getElementById('end-screen').classList.add('d-none');
     document.getElementById('start-screen').classList.remove('d-none');
@@ -146,6 +198,10 @@ window.addEventListener("keyup", (e) => {
 });
 
 
+/**
+ * This function will start the touchstart event and set the keyboard parameters on true if touch
+ * 
+ */
 function startTouchEvent() {
     document.getElementById('touch-left').addEventListener("touchstart", (e) => {
         e.preventDefault();
@@ -166,6 +222,10 @@ function startTouchEvent() {
 }
 
 
+/**
+ * This function will start the touchend event and set the keyboard parameters on false if you don´t touch
+ * 
+ */
 function endTouchEvent() {
     document.getElementById('touch-left').addEventListener("touchend", (e) => {
         e.preventDefault();

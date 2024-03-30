@@ -69,6 +69,11 @@ class Endboss extends MovableObject {
 
     }
 
+
+    /**
+     * This function check if the alert parameter is true or false by checking difference between postion x and alert_x
+     * 
+     */
     checkAlert() {
         let alert_interval = setInterval(() => {
             this.checkForEndbossBar();
@@ -84,6 +89,10 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * This function set two intervals, one for the movement of the endboss and one for different animations
+     * 
+     */
     animate() {
         let move_interval = setInterval(() => {
             this.moveLeft();
@@ -97,6 +106,10 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * check which type of animation has to play
+     * 
+     */
     endbossAnimations() {
         if (this.isDead()) {
             this.deadFunction();
@@ -112,6 +125,10 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * play attack animation and attacks the character by increase speed for a while
+     * 
+     */
     attackFunction() {
         this.playAnimation(this.IMAGES_ATTACK);
         this.speed = 7
@@ -122,6 +139,10 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * play dead images and end the game 
+     * 
+     */
     deadFunction() {
         this.playAnimation(this.IMAGES_DEAD);
         this.endGame('win');
@@ -131,6 +152,10 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * play the hurt images and set the attack parameter to true which will start the attack
+     * 
+     */
     hurtFunction() {
         this.playAnimation(this.IMAGES_HURT);
         this.speed = 0;
@@ -146,6 +171,10 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * Boss will stand still for a while during the alert images plays 
+     * 
+     */
     alertFunction() {
         this.playAnimation(this.IMAGES_ALERT);
         this.speed = 0;
@@ -155,6 +184,11 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * return the difference between the postion x and the new postion alert x
+     * 
+     * @returns return a number
+     */
     checkDifference() {
         return this.alert_x - this.x;
     }

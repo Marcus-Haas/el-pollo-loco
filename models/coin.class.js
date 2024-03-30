@@ -29,6 +29,10 @@ class Coin extends MovableObject {
     }
 
 
+    /**
+     * This function set an interval and create a pulsation for the coins
+     * 
+     */
     animate() {
         let pulsation_interval = setInterval(() => {
             this.playAnimation(this.IMAGES_PULSATION);

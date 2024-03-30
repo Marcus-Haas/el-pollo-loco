@@ -32,6 +32,10 @@ class SmallChicken extends MovableObject {
     }
 
 
+    /**
+     * This function set two intervals, one for the movement and the other for some animations
+     * 
+     */
     animate() {
         let move_interval = setInterval(() => {
             this.moveLeft();

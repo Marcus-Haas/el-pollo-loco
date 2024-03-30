@@ -32,12 +32,16 @@ class Chicken extends MovableObject {
     }
 
 
+    /**
+     * This function set two intervals, one for the movement and the other for some animations
+     * 
+     */
     animate() {
         let move_interval = setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
         pushInterval(move_interval);
-        
+
         let animation_interval = setInterval(() => {
             if (this.dead) {
                 this.loadImage(this.IMAGE_DEAD);

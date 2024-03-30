@@ -45,6 +45,10 @@ class ThrowableObject extends MovableObject {
     }
 
 
+    /**
+     * This function let the bottle fly
+     * 
+     */
     throw() {
         this.speedY = 25;
         let throw_interval = setInterval(() => {
@@ -62,6 +66,10 @@ class ThrowableObject extends MovableObject {
     }
 
 
+    /**
+     * This function plays the different animations of the bottle 
+     * 
+     */
     bottleAnimation() {
         setInterval(() => {
             if (!this.splash) {
@@ -73,6 +81,10 @@ class ThrowableObject extends MovableObject {
     }
 
 
+    /**
+     * Function check, if the bottle hit the ground and set the splash parameter to true and stop the fly of the bottle
+     * 
+     */
     bottleOnGround() {
         let bottle_ground_interval = setInterval(() => {
             if (this.offset.y >= 350) {
