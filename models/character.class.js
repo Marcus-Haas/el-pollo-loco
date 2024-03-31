@@ -238,6 +238,8 @@ class Character extends MovableObject {
         this.playAnimation(this.IMAGES_LONG_IDLE);
         if (master_sound) {
             this.snoring_sound.play();
+        } else {
+            this.snoring_sound.pause();
         }
     }
 }
