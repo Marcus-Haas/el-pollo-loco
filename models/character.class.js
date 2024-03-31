@@ -92,6 +92,10 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * This function set two intervals, one for the movement and the other for some animations
+     * 
+     */
     animate() {
         let moving_interval = setInterval(() => {
             this.pepeMovingFunction();
@@ -107,21 +111,31 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Pause walking sound and check character movement
+     * 
+     */
     pepeMovingFunction() {
         this.walking_sound.pause();
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.pepeWalkForward();
-        }
-        if (this.world.keyboard.LEFT && this.x > 0) {
+        } else if (this.world.keyboard.LEFT && this.x > 0) {
             this.pepeWalkBackward();
         }
         if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             this.pepeJumps();
         }
-        this.world.camera_x = -this.x + 180;
+        if (this.isDead()) {
+            this.walking_sound.pause();
+        }
+        this.world.camera_x = -this.x + 220;
     }
 
 
+    /**
+     * Character move to right and audio play 
+     * 
+     */
     pepeWalkForward() {
         this.moveRight();
         this.otherDirection = false;
@@ -131,6 +145,10 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Character move left and audio play
+     * 
+     */
     pepeWalkBackward() {
         this.moveLeft();
         this.otherDirection = true;
@@ -140,6 +158,10 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Character jumps and audio play
+     * 
+     */
     pepeJumps() {
         this.jump();
         if (master_sound) {
@@ -148,6 +170,10 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Check which animation has to play
+     * 
+     */
     pepesAnimations() {
         if (this.isDead()) {
             this.pepeDeadFunction();
@@ -165,8 +191,11 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Play images and sound for characters dead and start end game scene
+     * 
+     */
     pepeDeadFunction() {
-        this.walking_sound.pause();
         this.playAnimation(this.IMAGES_DEAD);
         if (master_sound) {
             this.pain_audio.play();
@@ -175,6 +204,10 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Play images and sound if the character gets hurt
+     * 
+     */
     pepeHurtFunction() {
         this.playAnimation(this.IMAGES_HURT);
         if (master_sound) {
@@ -183,6 +216,10 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Set or clear the idle counter
+     * 
+     */
     setIdleCounter() {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.D || this.world.keyboard.SPACE || this.isHurt()) {
             this.idle_counter = 0;
@@ -193,11 +230,14 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Play images and sound if the character fall asleep
+     * 
+     */
     sleep() {
         this.playAnimation(this.IMAGES_LONG_IDLE);
         if (master_sound) {
             this.snoring_sound.play();
         }
     }
-
 }
